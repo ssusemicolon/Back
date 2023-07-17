@@ -21,6 +21,7 @@ public class Store {
     @Column(name = "store_id")
     private Long storeId;
 
+    @Column(name = "store_name")
     private String storeName;
 
     private String address;
