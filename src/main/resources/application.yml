@@ -1,0 +1,30 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/software_contest?serverTimezone=Asia/Seoul
+    username: bfly
+    password: 20203085
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+#  thymeleaf:
+#    prefix: classpath:/static/
+
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    open-in-view: true
+
+    hibernate:
+      ddl-auto: create
+
+    properties:
+      hibernate:
+#        show_sql: true
+        format_sql: true
+        default_batch_fetch_size: 500
+
+logging:
+  level:
+    org:
+      hibernate:
+        SQL: debug
+
+
