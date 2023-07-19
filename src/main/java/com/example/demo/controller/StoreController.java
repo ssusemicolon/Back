@@ -1,14 +1,17 @@
 package com.example.demo.controller;
 
-import com.example.demo.dto.BusinessDaysDto;
-import com.example.demo.dto.BusinessHoursDto;
-import com.example.demo.dto.StoreResponseDto;
+import com.example.demo.dto.StoreInfoRequestDto;
+import com.example.demo.dto.StoreInfoResponseDto;
+import com.example.demo.global.ResultCode;
+import com.example.demo.global.ResultResponse;
 import com.example.demo.service.StoreService;
-import com.example.demo.vo.StoreInfoVO;
 import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+
 
 @RestController
 @RequiredArgsConstructor
@@ -16,21 +19,14 @@ public class StoreController {
     private final StoreService storeService;
 
     @PostMapping(value = "/store/register")
-    public StoreResponseDto register(@RequestBody StoreInfoVO storeInfoVo) {
-        String storeName = storeInfoVo.getStoreName();
-        int seatCount = storeInfoVo.getSeatCount();
-        String password = storeInfoVo.getPassword();
-        String address = storeInfoVo.getAddress();
-        double latitude = storeInfoVo.getLatitude();
-        double longitude = storeInfoVo.getLongitude();
-        BusinessDaysDto businessDaysDto = storeInfoVo.getBusinessDaysDto();
-        BusinessHoursDto businessHoursDto = storeInfoVo.getBusinessHoursDto();
+    public ResultResponse register(@RequestBody StoreInfoRequestDto storeInfoRequestDto) {
+        Long registeredStoreId = storeService.register(storeInfoRequestDto.toEntity());
+        return ResultResponse.of(ResultCode.REGISTER_STORE_SUCCESS, registeredStoreId);
+    }
 
-        Long registeredStoreId = storeService.register(storeName, seatCount, password,
-                address, latitude, longitude,
-                businessDaysDto.toEntity(),
-                businessHoursDto.toEntity());
-
-        return new StoreResponseDto(registeredStoreId);
+    @GetMapping(value = "/store/storeInfo/{storeId}")
+    public ResultResponse findStore(@PathVariable("storeId")Long storeId) {
+        StoreInfoResponseDto storeInfoResponseDto = storeService.findStore(storeId);
+        return ResultResponse.of(ResultCode.GET_SPECIFIC_STORE_SUCCESS, storeInfoResponseDto);
     }
 }

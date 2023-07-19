@@ -1,7 +1,5 @@
-package com.example.demo.vo;
+package com.example.demo.dto;
 
-import com.example.demo.dto.BusinessDaysDto;
-import com.example.demo.dto.BusinessHoursDto;
 import com.example.demo.entity.BusinessDays;
 import com.example.demo.entity.BusinessHours;
 import com.example.demo.entity.Day;
@@ -15,6 +13,7 @@ import java.util.List;
 @Setter
 public class StoreInfoRequestDto {
     private String storeName;
+    private String imageUrl;
     private int seatCount;
     private String password;
     private String address;
@@ -28,12 +27,12 @@ public class StoreInfoRequestDto {
 
     public Store toEntity() {
         return new Store(
-                storeName, seatCount, password,
+                storeName, imageUrl, seatCount, password,
                 address, latitude, longitude,
                 getBusinessDays(), getBusinessHours());
     }
 
-    private BusinessDays getBusinessDays() {
+    public BusinessDays getBusinessDays() {
         return new BusinessDays(businessDays);
     }
 

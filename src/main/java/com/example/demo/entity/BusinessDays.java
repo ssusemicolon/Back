@@ -9,15 +9,19 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import java.sql.Array;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
 @NoArgsConstructor
 public class BusinessDays {
-    @Id @GeneratedValue
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "business_days_id")
     private Long id;
 
@@ -48,5 +52,28 @@ public class BusinessDays {
         this.thursday = thursday;
         this.friday = friday;
         this.saturday = saturday;
+    }
+
+    public BusinessDays(List<Day> dayList) {
+        this.sunday = dayList.get(0);
+        this.monday = dayList.get(1);
+        this.tuesday = dayList.get(2);
+        this.wednesday = dayList.get(3);
+        this.thursday = dayList.get(4);
+        this.friday = dayList.get(5);
+        this.saturday = dayList.get(6);
+    }
+
+    public List<Day> getBusinessDayList() {
+        List<Day> businessDayList = new ArrayList<>();
+        businessDayList.add(sunday);
+        businessDayList.add(monday);
+        businessDayList.add(tuesday);
+        businessDayList.add(wednesday);
+        businessDayList.add(thursday);
+        businessDayList.add(friday);
+        businessDayList.add(saturday);
+
+        return businessDayList;
     }
 }

@@ -1,7 +1,9 @@
 package com.example.demo.entity;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,14 +17,34 @@ import java.util.List;
 
 @Entity
 @Getter
+@NoArgsConstructor
 public class Store {
+    public Store(String storeName, String imageUrl, int seatCount, String password,
+                 String address, double latitude, double longitude,
+                 BusinessDays businessDays, BusinessHours businessHours) {
+        this.storeName = storeName;
+        this.imageUrl = imageUrl;
+        this.seatCount = seatCount;
+        this.password = password;
+        this.address = address;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.businessDays = businessDays;
+        this.businessHours = businessHours;
+    }
+
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "store_id")
     private Long id;
 
     @Column(name = "store_name")
     private String storeName;
+
+    @Column(name = "image_url")
+    private String imageUrl;
+
+    @Column(name = "seat_count")
     private int seatCount;
 
     private String password;
@@ -30,38 +52,23 @@ public class Store {
     private double latitude;
     private double longitude;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "business_days_id")
     private BusinessDays businessDays;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "business_hours_id")
     private BusinessHours businessHours;
 
     @OneToMany(mappedBy = "store")
     List<Density> densityList = new ArrayList<>();
 
-    public static Store createStore(String storeName, int seatCount, String password, String address, double latitude, double longitude,
-                                    BusinessDays businessDays, BusinessHours businessHours, Density... densityArr) {
-        Store store = new Store();
-        store.setStoreName(storeName);
-        store.setSeatCount(seatCount);
-        store.setPassword(password);
-        store.setAddress(address);
-        store.setLatitude(latitude);
-        store.setLongitude(longitude);
-        store.setBusinessDays(businessDays);
-        store.setBusinessHours(businessHours);
-
-        for (Density density : densityArr) {
-            store.addDensity(density);
-        }
-
-        return store;
-    }
-
     public void setStoreName(String storeName) {
         this.storeName = storeName;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
     private void setSeatCount(int seatCount) {
