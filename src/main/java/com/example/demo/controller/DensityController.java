@@ -1,9 +1,13 @@
 package com.example.demo.controller;
 
-import com.example.demo.dto.DensityDto;
-import com.example.demo.dto.ResponseDto;
+import com.example.demo.dto.density.DensityGetRecentResponseDto;
+import com.example.demo.dto.density.DensityUpdateRequestDto;
+import com.example.demo.global.ResultCode;
+import com.example.demo.global.ResultResponse;
 import com.example.demo.service.DensityService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -13,11 +17,14 @@ import org.springframework.web.bind.annotation.RestController;
 public class DensityController {
     private final DensityService densityService;
     @PostMapping("/density/updateDensity")
-    public ResponseDto updateDensity(@RequestBody DensityDto densityDto) {
-        System.out.println("densityDto.getStoreId() = " + densityDto.getStoreId());
-        System.out.println("densityDto.getDensity() = " + densityDto.getDensity());
-        System.out.println("densityDto.getWhen() = " + densityDto.getWhen());
-        densityService.updateDensity(densityDto);
-        return new ResponseDto("D001", "밀집도가 갱신되었습니다.");
+    public ResultResponse updateDensity(@RequestBody DensityUpdateRequestDto densityUpdateRequestDto) {
+        densityService.updateDensity(densityUpdateRequestDto);
+        return ResultResponse.of(ResultCode.UPDATE_DENSITY_SUCCESS);
+    }
+
+    @GetMapping("/density/current/{storeId}")
+    public ResultResponse getRecentDensity(@PathVariable("storeId")Long storeId) {
+        DensityGetRecentResponseDto densityGetRecentResponseDto =  densityService.getRecentDensity(storeId);
+        return ResultResponse.of(ResultCode.GET_RECENT_DENSITY_SUCCESS, densityGetRecentResponseDto);
     }
 }

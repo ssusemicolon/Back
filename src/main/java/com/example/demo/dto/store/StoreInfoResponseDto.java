@@ -1,7 +1,5 @@
-package com.example.demo.dto;
+package com.example.demo.dto.store;
 
-import com.example.demo.entity.BusinessDays;
-import com.example.demo.entity.BusinessHours;
 import com.example.demo.entity.Day;
 import com.example.demo.entity.Store;
 import lombok.AllArgsConstructor;

@@ -1,4 +1,4 @@
-package com.example.demo.dto;
+package com.example.demo.dto.store;
 
 import com.example.demo.entity.BusinessDays;
 import com.example.demo.entity.BusinessHours;
