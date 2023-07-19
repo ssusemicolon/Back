@@ -4,6 +4,8 @@ import com.example.demo.dto.BusinessDaysDto;
 import com.example.demo.dto.BusinessHoursDto;
 import com.example.demo.entity.BusinessDays;
 import com.example.demo.entity.BusinessHours;
+import com.example.demo.entity.Day;
+import com.example.demo.entity.Store;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,7 +13,7 @@ import java.util.List;
 
 @Getter
 @Setter
-public class StoreInfoVO {
+public class StoreInfoRequestDto {
     private String storeName;
     private int seatCount;
     private String password;
@@ -22,26 +24,21 @@ public class StoreInfoVO {
     private int openBusinessHour;
     private int closeBusinessHour;
 
-    private List<Integer> businessDays;
+    private List<Day> businessDays;
 
-    // 추후 질문
-    @Override
-    public boolean equals(Object o) {
-        return this == o;
+    public Store toEntity() {
+        return new Store(
+                storeName, seatCount, password,
+                address, latitude, longitude,
+                getBusinessDays(), getBusinessHours());
     }
 
-    // 추후 질문
-    @Override
-    public int hashCode() {
-        return 1;
+    private BusinessDays getBusinessDays() {
+        return new BusinessDays(businessDays);
     }
 
-    public BusinessDaysDto getBusinessDaysDto() {
-        return new BusinessDaysDto(businessDays);
-    }
-
-    public BusinessHoursDto getBusinessHoursDto() {
-        return new BusinessHoursDto(openBusinessHour, closeBusinessHour);
+    private BusinessHours getBusinessHours() {
+        return new BusinessHours(openBusinessHour, closeBusinessHour);
     }
 
 }
