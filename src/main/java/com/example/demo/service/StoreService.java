@@ -27,6 +27,17 @@ public class StoreService {
         return StoreInfoResponseDto.of(store);
     }
 
+    public List<StoreInfoResponseDto> findStore(String query) {
+        List<Store> storeList = storeRepository.findByStoreNameContaining(query);
+
+        List<StoreInfoResponseDto> storeInfoResponseDtoList = new ArrayList<>();
+        for (Store store : storeList) {
+            storeInfoResponseDtoList.add(StoreInfoResponseDto.of(store));
+        }
+
+        return storeInfoResponseDtoList;
+    }
+
     public List<StoreInfoResponseDto> findAllStores() {
         List<Store> storeList = storeRepository.findAll();
 

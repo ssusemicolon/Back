@@ -11,7 +11,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -32,6 +35,13 @@ public class StoreController {
 
     @GetMapping(value = "/store/storeInfo/all")
     public ResultResponse findAllStores() {
-        return ResultResponse.of(ResultCode.GET_ALL_THE_STORES_SUCCESS, storeService.findAllStores());
+        List<StoreInfoResponseDto> storeInfoResponseDtoList = storeService.findAllStores();
+        return ResultResponse.of(ResultCode.GET_ALL_THE_STORES_SUCCESS, storeInfoResponseDtoList);
+    }
+
+    @GetMapping(value = "store/search")
+    public ResultResponse searchStores(@RequestParam String query) {
+        List<StoreInfoResponseDto> storeInfoResponseDtoList = storeService.findStore(query);
+        return ResultResponse.of(ResultCode.SEARCH_STORES_SUCCESS, storeInfoResponseDtoList);
     }
 }

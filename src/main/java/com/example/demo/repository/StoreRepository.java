@@ -6,17 +6,10 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.List;
 
 public interface StoreRepository extends JpaRepository<Store, Long> {
-//    @PersistenceContext
-//    private EntityManager em;
 
-    //    public Long reister(Store store) {
-//        em.persist(store);
-//        return store.getId();
-//    }
-//
-//    public Store find(Long id) {
-//        return em.find(Store.class, id);
-//    }
+    List<Store> findByStoreNameContaining(String query);
+
 }
