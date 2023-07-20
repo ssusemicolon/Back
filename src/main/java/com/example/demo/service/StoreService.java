@@ -1,6 +1,8 @@
 package com.example.demo.service;
 
 import com.example.demo.dto.store.StoreInfoResponseDto;
+import com.example.demo.entity.BusinessDays;
+import com.example.demo.entity.BusinessHours;
 import com.example.demo.entity.Store;
 import com.example.demo.repository.StoreRepository;
 import lombok.RequiredArgsConstructor;
@@ -15,6 +17,33 @@ public class StoreService {
     private final StoreRepository storeRepository;
 
     public Long register(Store store) {
+        return storeRepository.save(store).getId();
+    }
+
+    public Long updateStore(Long storeId, Store updatedStore) {
+        Store store = storeRepository.findById(storeId).orElse(null);
+        BusinessDays businessDays = store.getBusinessDays();
+        BusinessHours businessHours = store.getBusinessHours();
+
+        store.setStoreName(updatedStore.getStoreName());
+        store.setImageUrl(updatedStore.getImageUrl());
+        store.setSeatCount(updatedStore.getSeatCount());
+        store.setPassword(updatedStore.getPassword());
+        store.setAddress(updatedStore.getAddress());
+        store.setLatitude(updatedStore.getLatitude());
+        store.setLongitude(updatedStore.getLongitude());
+
+        businessDays.setSunday(updatedStore.getBusinessDays().getSunday());
+        businessDays.setMonday(updatedStore.getBusinessDays().getMonday());
+        businessDays.setTuesday(updatedStore.getBusinessDays().getTuesday());
+        businessDays.setWednesday(updatedStore.getBusinessDays().getWednesday());
+        businessDays.setThursday(updatedStore.getBusinessDays().getThursday());
+        businessDays.setFriday(updatedStore.getBusinessDays().getFriday());
+        businessDays.setSaturday(updatedStore.getBusinessDays().getSaturday());
+
+        businessHours.setOpenBusinessHour(updatedStore.getBusinessHours().getOpenBusinessHour());
+        businessHours.setCloseBusinessHour(updatedStore.getBusinessHours().getCloseBusinessHour());
+
         return storeRepository.save(store).getId();
     }
 

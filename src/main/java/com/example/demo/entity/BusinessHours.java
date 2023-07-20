@@ -3,6 +3,7 @@ package com.example.demo.entity;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,7 +14,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
 @Entity
-@Getter
+@Getter @Setter
 @NoArgsConstructor
 public class BusinessHours {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -71,11 +71,11 @@ public class Store {
         this.imageUrl = imageUrl;
     }
 
-    private void setSeatCount(int seatCount) {
+    public void setSeatCount(int seatCount) {
         this.seatCount = seatCount;
     }
 
-    private void setPassword(String password) {
+    public void setPassword(String password) {
         this.password = password;
     }
 

@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import com.example.demo.dto.density.DensityGetRecentResponseDto;
 import com.example.demo.dto.density.DensityGetSpecificDayResponseDto;
+import com.example.demo.dto.density.DensityGetWeekResponseDto;
 import com.example.demo.dto.density.DensityUpdateRequestDto;
 import com.example.demo.global.ResultCode;
 import com.example.demo.global.ResultResponse;
@@ -38,5 +39,13 @@ public class DensityController {
                                                 @PathVariable("storeId") Long storeId) {
         DensityGetSpecificDayResponseDto densityGetSpecificDayResponseDto = densityService.getSpecificDayDensity(storeId, specificDate);
         return ResultResponse.of(ResultCode.GET_SPECIFIC_DAY_DENSITY_SUCCESS, densityGetSpecificDayResponseDto);
+    }
+
+    @GetMapping("/density/week/{storeId}")
+    public ResultResponse getWeekDensity(@PathVariable("storeId") Long storeId) {
+        // 클라이언트 요청 시간이 자정 직전일 경우, 날짜가 넘어가는 문제가 생길 수 있어서.. 프론트 단에서 날짜를 넘겨받을지 고민 중
+        LocalDate today = LocalDate.now();
+        DensityGetWeekResponseDto densityGetWeekResponseDto = densityService.getWeekDensity(storeId, today);
+        return ResultResponse.of(ResultCode.GET_WEEK_DENSITY_SUCCESS, densityGetWeekResponseDto);
     }
 }

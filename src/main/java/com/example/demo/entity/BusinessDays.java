@@ -3,6 +3,7 @@ package com.example.demo.entity;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -18,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Getter
+@Getter @Setter
 @NoArgsConstructor
 public class BusinessDays {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)

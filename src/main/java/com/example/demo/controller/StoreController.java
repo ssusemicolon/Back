@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,6 +26,12 @@ public class StoreController {
     public ResultResponse register(@RequestBody StoreInfoRequestDto storeInfoRequestDto) {
         Long registeredStoreId = storeService.register(storeInfoRequestDto.toEntity());
         return ResultResponse.of(ResultCode.REGISTER_STORE_SUCCESS, StoreRegisterResponseDto.of(registeredStoreId));
+    }
+
+    @PutMapping(value = "/store/storeInfo/{storeId}")
+    public ResultResponse updateStore(@PathVariable("storeId") Long storeId, @RequestBody StoreInfoRequestDto storeInfoRequestDto) {
+        Long registeredStoreId = storeService.updateStore(storeId, storeInfoRequestDto.toEntity());
+        return ResultResponse.of(ResultCode.UPDATE_STORE_INFO_SUCCESS, StoreRegisterResponseDto.of(registeredStoreId));
     }
 
     @GetMapping(value = "/store/storeInfo/{storeId}")

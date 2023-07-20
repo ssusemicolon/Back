@@ -2,6 +2,7 @@ package com.example.demo.service;
 
 import com.example.demo.dto.density.DensityGetRecentResponseDto;
 import com.example.demo.dto.density.DensityGetSpecificDayResponseDto;
+import com.example.demo.dto.density.DensityGetWeekResponseDto;
 import com.example.demo.dto.density.DensityUpdateRequestDto;
 import com.example.demo.entity.Density;
 import com.example.demo.entity.Store;
@@ -72,5 +73,31 @@ public class DensityService {
         }
 
         return DensityGetSpecificDayResponseDto.of(storeId, openBusinessHour, closeBusinessHour, densityPerHourList);
+    }
+
+    public DensityGetWeekResponseDto getWeekDensity(Long storeId, LocalDate today) {
+        Store store = storeRepository.findById(storeId).orElse(null);
+        List<Integer> densityPerDayList = new ArrayList<>();
+
+        // 요청 날짜로부터 일주일 전 날짜에서 시작
+        LocalDate day = today.minusDays(7);
+        while (day.isBefore(today)) {
+            List<Density> densityList = densityRepository.findSpecificDayDensityList(storeId, day.toString());
+            int densityRateSum = 0;
+            int densityCount = densityList.size();
+            for (Density density : densityList) {
+                densityRateSum += density.getDensityRate();
+            }
+
+            int densityPerDay = 0;
+            if (densityCount != 0) {
+                densityPerDay = densityRateSum / densityCount;
+            }
+
+            densityPerDayList.add(densityPerDay);
+            day = day.plusDays(1);
+        }
+
+        return DensityGetWeekResponseDto.of(storeId, store.getBusinessDays().getBusinessDayList(), densityPerDayList);
     }
 }
