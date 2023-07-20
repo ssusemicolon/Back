@@ -17,4 +17,20 @@ public interface DensityRepository extends JpaRepository<Density, Long> {
 
     // 내가 하고싶은 거
     List<Density> findByStoreId(@Param("storeId") Long storeId);
+
+
+    /**
+     * 현재 시간으로부터 24시간 동안의 밀집도 리스트를 조회하는 메소드
+     */
+    @Query(value = "SELECT * FROM density WHERE (store_id = :storeId) AND calculated_time BETWEEN DATE_ADD(NOW(),INTERVAL -1 DAY) AND NOW()", nativeQuery = true)
+    List<Density> findRecentDayDensityList(@Param("storeId") Long storeId);
+
+    /**
+     *
+     * @param storeId: Long 타입의 store 객체 id
+     * @param specificDate: "YYYY-mm-dd" 형태의 String 타입 날짜 문자열
+     * @return 입력받은 id를 가진 매장의 입력받은 날짜에 계산된 밀집도인 Density 리스트
+     */
+    @Query(value = "SELECT * FROM density WHERE (store_id = :storeId) AND date_format(calculated_time, \"%Y-%m-%d\") = :specificDate", nativeQuery = true)
+    List<Density> findSpecificDayDensityList(@Param("storeId") Long storeId, @Param("specificDate") String specificDate);
 }

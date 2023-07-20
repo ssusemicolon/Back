@@ -16,8 +16,10 @@ public enum ResultCode {
     // 밀집도 관련 코드
     UPDATE_DENSITY_SUCCESS("D001", "선택한 매장의 밀집도를 갱신하였습니다."),
     GET_RECENT_DENSITY_SUCCESS("D002", "선택한 매장의 현재 밀집도를 조회하였습니다."),
-    GET_DAY_DENSITY_STATISTICS_SUCCESS("D003", "선택한 매장의 최근 하루 밀집도 통계를 조회하였습니다."),
-    GET_WEEK_DENSITY_STATISTICS_SUCCESS("D004", "선택한 매장의 최근 일주일 밀집도 통계를 조회하였습니다.");
+
+    GET_SPECIFIC_DAY_DENSITY_SUCCESS("D003", "선택한 매장의 특정 날짜의 시간별 밀집도를 조회하였습니다."),
+    GET_DAY_DENSITY_SUCCESS("D004", "선택한 매장의 최근 하루 밀집도 통계를 조회하였습니다."),
+    GET_WEEK_DENSITY_SUCCESS("D005", "선택한 매장의 최근 일주일 밀집도 통계를 조회하였습니다.");
 
 
     private final String code;

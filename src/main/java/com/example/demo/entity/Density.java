@@ -36,5 +36,15 @@ public class Density {
     @Column(name = "density_rate")
     private int densityRate;
 
+    @Column(name = "calculated_time")
     private LocalDateTime calculatedTime;
+
+
+    public boolean IsCalculatedAtThisHour(int hour) {
+        return calculatedTime.getHour() == hour;
+    }
+
+    public boolean IsCalculatedAtThisDay(int day) {
+        return calculatedTime.getDayOfMonth() == day;
+    }
 }
