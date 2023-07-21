@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import com.example.demo.dto.store.StoreDeleteResponseDto;
 import com.example.demo.dto.store.StoreInfoResponseDto;
 import com.example.demo.entity.BusinessDays;
 import com.example.demo.entity.BusinessHours;
@@ -76,5 +77,15 @@ public class StoreService {
         }
 
         return storeInfoResponseDtoList;
+    }
+
+    public StoreDeleteResponseDto deleteStore(Long storeId, String password) {
+        Store store = storeRepository.findById(storeId).orElse(null);
+
+        if (store == null) {
+            System.out.println("=============해당 매장이 존재하지 않습니다.==========");
+        }
+        storeRepository.delete(store);
+        return StoreDeleteResponseDto.of(storeId);
     }
 }

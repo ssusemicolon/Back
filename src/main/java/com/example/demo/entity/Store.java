@@ -60,7 +60,7 @@ public class Store {
     @JoinColumn(name = "business_hours_id")
     private BusinessHours businessHours;
 
-    @OneToMany(mappedBy = "store")
+    @OneToMany(mappedBy = "store", cascade = CascadeType.ALL)
     List<Density> densityList = new ArrayList<>();
 
     public void setStoreName(String storeName) {
