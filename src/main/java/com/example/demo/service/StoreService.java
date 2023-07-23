@@ -1,6 +1,9 @@
 package com.example.demo.service;
 
+import com.example.demo.dto.NearByStoreInterface;
 import com.example.demo.dto.store.StoreDeleteResponseDto;
+import com.example.demo.dto.store.StoreFindNearByRequestDto;
+import com.example.demo.dto.store.StoreFindNearByResponseDto;
 import com.example.demo.dto.store.StoreInfoResponseDto;
 import com.example.demo.entity.BusinessDays;
 import com.example.demo.entity.BusinessHours;
@@ -66,6 +69,23 @@ public class StoreService {
         }
 
         return storeInfoResponseDtoList;
+    }
+
+    public List<StoreFindNearByResponseDto> findNearByStores(StoreFindNearByRequestDto storeFindNearByRequestDto) {
+        double radius = storeFindNearByRequestDto.getRadius();
+        double latitude = storeFindNearByRequestDto.getLatitude();
+        double longitude = storeFindNearByRequestDto.getLongitude();
+        List<NearByStoreInterface> nearByStoreInterfaceList = storeRepository.findNearByStores(radius, latitude, longitude);
+
+        List<StoreFindNearByResponseDto> storeFindNearByResponseDtoList = new ArrayList<>();
+        for (NearByStoreInterface nearByStoreinterface : nearByStoreInterfaceList) {
+            Long storeId = nearByStoreinterface.getStoreId();
+            Store store = storeRepository.findById(storeId).orElse(null);
+            storeFindNearByResponseDtoList.add(StoreFindNearByResponseDto.of(store, nearByStoreinterface.getDistance()));
+        }
+
+        return storeFindNearByResponseDtoList;
+
     }
 
     public List<StoreInfoResponseDto> findAllStores() {

@@ -1,6 +1,8 @@
 package com.example.demo.controller;
 
 import com.example.demo.dto.store.StoreDeleteResponseDto;
+import com.example.demo.dto.store.StoreFindNearByRequestDto;
+import com.example.demo.dto.store.StoreFindNearByResponseDto;
 import com.example.demo.dto.store.StoreInfoRequestDto;
 import com.example.demo.dto.store.StoreInfoResponseDto;
 import com.example.demo.dto.store.StoreRegisterResponseDto;
@@ -40,6 +42,12 @@ public class StoreController {
     public ResultResponse findStore(@PathVariable("storeId")Long storeId) {
         StoreInfoResponseDto storeInfoResponseDto = storeService.findStore(storeId);
         return ResultResponse.of(ResultCode.GET_SPECIFIC_STORE_SUCCESS, storeInfoResponseDto);
+    }
+
+    @PostMapping(value = "/store/nearby")
+    public ResultResponse findNearByStores(@RequestBody StoreFindNearByRequestDto storeFindNearByRequestDto) {
+        List<StoreFindNearByResponseDto> storeFindNearByResponseDtoList = storeService.findNearByStores(storeFindNearByRequestDto);
+        return ResultResponse.of(ResultCode.SEARCH_STORES_SUCCESS, storeFindNearByResponseDtoList);
     }
 
     @GetMapping(value = "/store/storeInfo/all")

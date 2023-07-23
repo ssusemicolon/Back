@@ -1,6 +1,5 @@
 package com.example.demo.dto.store;
 
-import com.example.demo.entity.Day;
 import com.example.demo.entity.Store;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,27 +8,16 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
-import java.util.List;
 
-// @Builder
 @SuperBuilder
 @Getter @Setter
-@NoArgsConstructor
 @AllArgsConstructor
-public class StoreInfoResponseDto {
-    private Long storeId;
-    private String storeName;
-    private String imageUrl;
-    private int seatCount;
-    private String address;
-    private double latitude;
-    private double longitude;
-    private int openBusinessHour;
-    private int closeBusinessHour;
-    private List<Day> businessDays;
+@NoArgsConstructor
+public class StoreFindNearByResponseDto extends StoreInfoResponseDto {
+    private double distance;
 
-    public static StoreInfoResponseDto of(Store store) {
-        return StoreInfoResponseDto.builder()
+    public static StoreFindNearByResponseDto of(Store store, double distance) {
+        return StoreFindNearByResponseDto.builder()
                 .storeId(store.getId())
                 .storeName(store.getStoreName())
                 .imageUrl(store.getImageUrl())
@@ -40,6 +28,7 @@ public class StoreInfoResponseDto {
                 .openBusinessHour(store.getBusinessHours().getOpenBusinessHour())
                 .closeBusinessHour(store.getBusinessHours().getCloseBusinessHour())
                 .businessDays(store.getBusinessDays().getBusinessDayList())
+                .distance((double)Math.round(distance * 1000) / 1000)
                 .build();
     }
 }
