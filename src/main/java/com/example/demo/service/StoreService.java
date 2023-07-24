@@ -30,7 +30,7 @@ public class StoreService {
         BusinessHours businessHours = store.getBusinessHours();
 
         store.setStoreName(updatedStore.getStoreName());
-        store.setImageUrl(updatedStore.getImageUrl());
+        store.setThumUrl(updatedStore.getThumUrl());
         store.setSeatCount(updatedStore.getSeatCount());
         store.setPassword(updatedStore.getPassword());
         store.setAddress(updatedStore.getAddress());

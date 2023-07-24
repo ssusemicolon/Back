@@ -2,7 +2,6 @@ package com.example.demo.dto.store;
 
 import com.example.demo.entity.Store;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -20,7 +19,7 @@ public class StoreFindNearByResponseDto extends StoreInfoResponseDto {
         return StoreFindNearByResponseDto.builder()
                 .storeId(store.getId())
                 .storeName(store.getStoreName())
-                .imageUrl(store.getImageUrl())
+                .thumUrl(store.getThumUrl())
                 .seatCount(store.getSeatCount())
                 .address(store.getAddress())
                 .latitude(store.getLatitude())

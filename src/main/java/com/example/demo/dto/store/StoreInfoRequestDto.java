@@ -13,7 +13,7 @@ import java.util.List;
 @Setter
 public class StoreInfoRequestDto {
     private String storeName;
-    private String imageUrl;
+    private String thumUrl;
     private int seatCount;
     private String password;
     private String address;
@@ -27,7 +27,7 @@ public class StoreInfoRequestDto {
 
     public Store toEntity() {
         return new Store(
-                storeName, imageUrl, seatCount, password,
+                storeName, thumUrl, seatCount, password,
                 address, latitude, longitude,
                 getBusinessDays(), getBusinessHours());
     }

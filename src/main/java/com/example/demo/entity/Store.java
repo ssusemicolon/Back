@@ -19,11 +19,11 @@ import java.util.List;
 @Getter
 @NoArgsConstructor
 public class Store {
-    public Store(String storeName, String imageUrl, int seatCount, String password,
+    public Store(String storeName, String thumUrl, int seatCount, String password,
                  String address, double latitude, double longitude,
                  BusinessDays businessDays, BusinessHours businessHours) {
         this.storeName = storeName;
-        this.imageUrl = imageUrl;
+        this.thumUrl = thumUrl;
         this.seatCount = seatCount;
         this.password = password;
         this.address = address;
@@ -41,8 +41,8 @@ public class Store {
     @Column(name = "store_name")
     private String storeName;
 
-    @Column(name = "image_url")
-    private String imageUrl;
+    @Column(name = "thum_url")
+    private String thumUrl;
 
     @Column(name = "seat_count")
     private int seatCount;
@@ -67,8 +67,8 @@ public class Store {
         this.storeName = storeName;
     }
 
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
+    public void setThumUrl(String imageUrl) {
+        this.thumUrl = imageUrl;
     }
 
     public void setSeatCount(int seatCount) {
