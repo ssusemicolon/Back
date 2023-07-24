@@ -25,7 +25,7 @@ public class Density {
         this.calculatedTime = calculatedTime;
     }
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "density_id")
     private Long id;
 

@@ -1,0 +1,1 @@
+insert into store(store_name, address, latitude, longitude, password, seat_count) values("테스트카페", "경기도 군포시 용호2로 힛힛", 38.44, 127.8424, "20202020", 40);
