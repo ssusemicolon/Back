@@ -47,7 +47,7 @@ public class StoreController {
     @PostMapping(value = "/store/nearby")
     public ResultResponse findNearByStores(@RequestBody StoreFindNearByRequestDto storeFindNearByRequestDto) {
         List<StoreFindNearByResponseDto> storeFindNearByResponseDtoList = storeService.findNearByStores(storeFindNearByRequestDto);
-        return ResultResponse.of(ResultCode.SEARCH_STORES_SUCCESS, storeFindNearByResponseDtoList);
+        return ResultResponse.of(ResultCode.GET_NEARBY_STORES_SUCCESS, storeFindNearByResponseDtoList);
     }
 
     @GetMapping(value = "/store/storeInfo/all")
