@@ -32,7 +32,7 @@ public class StoreInfoRequestDto {
                 getBusinessDays(), getBusinessHours());
     }
 
-    public BusinessDays getBusinessDays() {
+    private BusinessDays getBusinessDays() {
         return new BusinessDays(businessDays);
     }
 

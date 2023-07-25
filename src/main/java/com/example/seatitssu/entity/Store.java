@@ -63,32 +63,50 @@ public class Store {
     @OneToMany(mappedBy = "store", cascade = CascadeType.ALL)
     List<Density> densityList = new ArrayList<>();
 
-    public void setStoreName(String storeName) {
-        this.storeName = storeName;
+    public void updateStoreName(String storeName) {
+        if (this.storeName == null || !this.storeName.equals(storeName)) {
+            this.storeName = storeName;
+        }
     }
 
-    public void setThumUrl(String imageUrl) {
-        this.thumUrl = imageUrl;
+    public void updateThumUrl(String thumUrl) {
+        if (this.thumUrl == null || !this.thumUrl.equals(thumUrl)) {
+            this.thumUrl = thumUrl;
+        }
     }
 
-    public void setSeatCount(int seatCount) {
-        this.seatCount = seatCount;
+    public void updateSeatCount(int seatCount) {
+        if (this.seatCount != seatCount) {
+            this.seatCount = seatCount;
+        }
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void updatePassword(String password) {
+        if (this.password == null || !this.password.equals(password)) {
+            this.password = password;
+        }
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void updateAddress(String address) {
+        if (this.address == null || !this.address.equals(address)) {
+            this.address = address;
+        }
     }
 
-    public void setLatitude(double latitude) {
-        this.latitude = latitude;
+    public void updateLatitude(double latitude) {
+        double epsilon = 0.000001d;
+
+        if (Math.abs(this.latitude - latitude) > epsilon) {
+            this.latitude = latitude;
+        }
     }
 
-    public void setLongitude(double longitude) {
-        this.longitude = longitude;
+    public void updateLongitude(double longitude) {
+        double epsilon = 0.000001d;
+
+        if (Math.abs(this.longitude - longitude) > epsilon) {
+            this.longitude = longitude;
+        }
     }
 
     public void setBusinessDays(BusinessDays businessDays) {
@@ -102,5 +120,17 @@ public class Store {
     public void addDensity(Density density) {
         densityList.add(density);
         density.setStore(this);
+    }
+
+    public void compareAndUpdate(Store store) {
+        this.updateStoreName(store.getStoreName());
+        this.updateThumUrl(store.getThumUrl());
+        this.updateSeatCount(store.getSeatCount());
+        this.updatePassword(store.getPassword());
+        this.updateAddress(store.getAddress());
+        this.updateLatitude(store.getLatitude());
+        this.updateLongitude(store.getLongitude());
+        this.businessDays.compareAndUpdate(store.getBusinessDays());
+        this.businessHours.compareAndUpdate(store.getBusinessHours());
     }
 }

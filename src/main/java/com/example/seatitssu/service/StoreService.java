@@ -26,27 +26,11 @@ public class StoreService {
 
     public Long updateStore(Long storeId, Store updatedStore) {
         Store store = storeRepository.findById(storeId).orElse(null);
-        BusinessDays businessDays = store.getBusinessDays();
-        BusinessHours businessHours = store.getBusinessHours();
+        if (store == null ) {
+            System.out.println("============변경할 매장이 존재하지 않습니다.===============");
+        }
 
-        store.setStoreName(updatedStore.getStoreName());
-        store.setThumUrl(updatedStore.getThumUrl());
-        store.setSeatCount(updatedStore.getSeatCount());
-        store.setPassword(updatedStore.getPassword());
-        store.setAddress(updatedStore.getAddress());
-        store.setLatitude(updatedStore.getLatitude());
-        store.setLongitude(updatedStore.getLongitude());
-
-        businessDays.setSunday(updatedStore.getBusinessDays().getSunday());
-        businessDays.setMonday(updatedStore.getBusinessDays().getMonday());
-        businessDays.setTuesday(updatedStore.getBusinessDays().getTuesday());
-        businessDays.setWednesday(updatedStore.getBusinessDays().getWednesday());
-        businessDays.setThursday(updatedStore.getBusinessDays().getThursday());
-        businessDays.setFriday(updatedStore.getBusinessDays().getFriday());
-        businessDays.setSaturday(updatedStore.getBusinessDays().getSaturday());
-
-        businessHours.setOpenBusinessHour(updatedStore.getBusinessHours().getOpenBusinessHour());
-        businessHours.setCloseBusinessHour(updatedStore.getBusinessHours().getCloseBusinessHour());
+        store.compareAndUpdate(store);
 
         return storeRepository.save(store).getId();
     }

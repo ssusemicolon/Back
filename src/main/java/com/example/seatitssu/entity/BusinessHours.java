@@ -32,4 +32,21 @@ public class BusinessHours {
         this.openBusinessHour = openBusinessHour;
         this.closeBusinessHour = closeBusinessHour;
     }
+
+    public void updateOpenBusinessHour(int openBusinessHour) {
+        if (this.openBusinessHour != openBusinessHour) {
+            this.openBusinessHour = openBusinessHour;
+        }
+    }
+
+    public void updateCloseBusinessHour(int closeBusinessHour) {
+        if (this.closeBusinessHour != closeBusinessHour) {
+            this.closeBusinessHour = closeBusinessHour;
+        }
+    }
+
+    public void compareAndUpdate(BusinessHours businessHours) {
+        updateOpenBusinessHour(businessHours.getOpenBusinessHour());
+        updateCloseBusinessHour(businessHours.getCloseBusinessHour());
+    }
 }

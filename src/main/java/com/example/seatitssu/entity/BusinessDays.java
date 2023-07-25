@@ -75,4 +75,55 @@ public class BusinessDays {
 
         return businessDayList;
     }
+
+    public void updateSunday(Day sunday) {
+        if (this.sunday == null || !this.sunday.equals(sunday)) {
+            this.sunday = sunday;
+        }
+    }
+
+    public void updateMonday(Day monday) {
+        if (this.monday == null || !this.monday.equals(monday)) {
+            this.monday = monday;
+        }
+    }
+    public void updateTuesday(Day tuesday) {
+        if (this.tuesday == null || !this.tuesday.equals(tuesday)) {
+            this.tuesday = tuesday;
+        }
+    }
+
+    public void updateWednesday(Day wednesday) {
+        if (this.wednesday == null || !this.wednesday.equals(wednesday)) {
+            this.wednesday = wednesday;
+        }
+    }
+
+    public void updateThursday(Day thursday) {
+        if (this.thursday == null || !this.thursday.equals(thursday)) {
+            this.thursday = thursday;
+        }
+    }
+
+    public void updateFriday(Day friday) {
+        if (this.friday == null || !this.friday.equals(friday)) {
+            this.friday = friday;
+        }
+    }
+    public void updateSaturday(Day saturday) {
+        if (this.saturday == null || !this.saturday.equals(saturday)) {
+            this.saturday = saturday;
+        }
+    }
+
+
+    public void compareAndUpdate(BusinessDays businessDays) {
+        updateSunday(businessDays.getSunday());
+        updateMonday(businessDays.getMonday());
+        updateTuesday(businessDays.getTuesday());
+        updateWednesday(businessDays.getWednesday());
+        updateThursday(businessDays.getThursday());
+        updateFriday(businessDays.getFriday());
+        updateSaturday(businessDays.getSaturday());
+    }
 }

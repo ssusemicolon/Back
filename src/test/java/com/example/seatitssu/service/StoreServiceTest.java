@@ -33,7 +33,6 @@ class StoreServiceTest {
     public void 매장_등록() throws Exception {
         //given
         Store store = new Store();
-        store.setStoreName("손커피연구소");
 
         //when
         Long storeId = storeService.register(store);
@@ -61,6 +60,28 @@ class StoreServiceTest {
         // storeId는 primary key로 해당 값이 같을 경우, 같은 컬럼임을 의미한다.
         assertThat(findStoreId).isEqualTo(storeId);
 
+    }
+
+    @Test
+    @DisplayName("매장의 정보를 변경해본다")
+    void 매장_이름_변경() throws Exception {
+        // given
+        Day[] businessDaysList = { Day.OPEN, Day.OPEN, Day.OPEN, Day.OPEN, Day.OPEN, Day.OPEN, Day.CLOSED };
+        Store store = new Store("베어메이드", null, 40, "bear", null, 0.0, 0.0, null, null);
+        store.setBusinessHours(new BusinessHours(9, 22));
+        store.setBusinessDays(new BusinessDays(Arrays.asList(businessDaysList)));
+        Long storeId = storeService.register(store);
+
+        // when
+        store.updateStoreName("폭스메이드");
+        System.out.println("==========================");
+        Long updatedStoreId = storeService.updateStore(storeId, store);
+        System.out.println("==========================");
+        Store updatedStore = storeRepository.findById(updatedStoreId).orElse(null);
+
+        // then
+        assertThat(updatedStoreId).isEqualTo(storeId);
+        assertThat(updatedStore.getStoreName()).isEqualTo("폭스메이드");
     }
 
 }
