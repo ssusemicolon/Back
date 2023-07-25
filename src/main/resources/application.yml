@@ -11,10 +11,11 @@ spring:
       schema-locations: classpath:/schema.sql
       data-locations: classpath:/data.sql
 
+
   jpa:
     database-platform: org.hibernate.dialect.MySQL8Dialect
     open-in-view: true
-
+#    defer-datasource-initialization: true
     hibernate:
 #      ddl-auto: create-drop
       ddl-auto: none
