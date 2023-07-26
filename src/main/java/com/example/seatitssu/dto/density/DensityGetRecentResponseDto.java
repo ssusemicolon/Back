@@ -2,11 +2,11 @@ package com.example.seatitssu.dto.density;
 
 import com.example.seatitssu.entity.Density;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import java.time.LocalDateTime;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.time.LocalDateTime;
 
 @Builder
 @Getter @Setter

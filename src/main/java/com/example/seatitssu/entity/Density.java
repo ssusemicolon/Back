@@ -1,10 +1,5 @@
 package com.example.seatitssu.entity;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,7 +7,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Getter @Setter
@@ -29,16 +29,17 @@ public class Density {
     @Column(name = "density_id")
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "store_id")
-    private Store store;
-
+    @NotNull
     @Column(name = "density_rate")
     private int densityRate;
 
+    @NotNull
     @Column(name = "calculated_time")
     private LocalDateTime calculatedTime;
 
+    @ManyToOne @NotNull
+    @JoinColumn(name = "store_id")
+    private Store store;
 
     public boolean IsCalculatedAtThisHour(int hour) {
         return calculatedTime.getHour() == hour;

@@ -2,7 +2,6 @@ package com.example.seatitssu.dto;
 
 import com.example.seatitssu.entity.BusinessDays;
 import com.example.seatitssu.entity.Day;
-
 import java.util.ArrayList;
 import java.util.List;
 

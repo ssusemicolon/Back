@@ -27,6 +27,7 @@ public class StoreFindNearByResponseDto extends StoreInfoResponseDto {
                 .openBusinessHour(store.getBusinessHours().getOpenBusinessHour())
                 .closeBusinessHour(store.getBusinessHours().getCloseBusinessHour())
                 .businessDays(store.getBusinessDays().getBusinessDayList())
+                .density(store.getRecentDensityRate())
                 .distance((double)Math.round(distance * 1000) / 1000)
                 .build();
     }

@@ -7,6 +7,7 @@ import com.example.seatitssu.dto.store.StoreFindNearByResponseDto;
 import com.example.seatitssu.dto.store.StoreInfoResponseDto;
 import com.example.seatitssu.entity.BusinessDays;
 import com.example.seatitssu.entity.BusinessHours;
+import com.example.seatitssu.entity.Density;
 import com.example.seatitssu.entity.Store;
 import com.example.seatitssu.repository.StoreRepository;
 import lombok.RequiredArgsConstructor;
@@ -41,6 +42,7 @@ public class StoreService {
             System.out.println("==============찾으시는 매장이 없습니다.==============");
             return null;
         }
+
         return StoreInfoResponseDto.of(store);
     }
 
@@ -65,6 +67,7 @@ public class StoreService {
         for (NearByStoreInterface nearByStoreinterface : nearByStoreInterfaceList) {
             Long storeId = nearByStoreinterface.getStoreId();
             Store store = storeRepository.findById(storeId).orElse(null);
+
             storeFindNearByResponseDtoList.add(StoreFindNearByResponseDto.of(store, nearByStoreinterface.getDistance()));
         }
 

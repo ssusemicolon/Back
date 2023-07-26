@@ -40,21 +40,21 @@ create table business_hours (
 
 create table density (
     density_id bigint not null auto_increment,
-    density_rate integer,
-    calculated_time datetime(6),
-    store_id bigint,
+    density_rate integer not null,
+    calculated_time datetime(6) not null,
+    store_id bigint not null,
     primary key (density_id)
 ) engine=InnoDB;
 
 create table store (
     store_id bigint not null auto_increment,
-    store_name varchar(255),
-    address varchar(255),
+    store_name varchar(255) not null,
+    address varchar(255) not null,
     thum_url varchar(255),
-    latitude double precision not null,
-    longitude double precision not null,
     password varchar(255),
     seat_count integer,
+    latitude double precision not null,
+    longitude double precision not null,
     business_days_id bigint,
     business_hours_id bigint,
     primary key (store_id)

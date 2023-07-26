@@ -1,7 +1,6 @@
 package com.example.seatitssu.dto;
 
 import com.example.seatitssu.entity.BusinessHours;
-
 import javax.validation.constraints.NotNull;
 
 public class BusinessHoursDto {

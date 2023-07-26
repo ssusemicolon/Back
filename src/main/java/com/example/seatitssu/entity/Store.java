@@ -12,6 +12,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,23 +36,27 @@ public class Store {
         this.businessHours = businessHours;
     }
 
+    // 질문: 어차피 @NotNull, @NotBlank, @NotEmpty 뭘 하든, 내가 직접 작성한 schema.sql DDL에 내가 not null 옵션 붙일 거라서,
+    // @NotNull을 필수로 써야 하지도 않고, RequestDto를 받아올 때, @NotBlank 어노테이션을 붙이면 알아서 걸러지는데, 엔티티에는 @NotNull 붙이는 게 낫지 않나?
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "store_id")
     private Long id;
-
+    @NotBlank
     @Column(name = "store_name")
     private String storeName;
-
+    @NotBlank
+    private String address;
     @Column(name = "thum_url")
     private String thumUrl;
-
+    @NotBlank
+    private String password;
+    @NotNull
     @Column(name = "seat_count")
     private int seatCount;
-
-    private String password;
-    private String address;
+    @NotNull
     private double latitude;
+    @NotNull
     private double longitude;
 
     @OneToOne(cascade = CascadeType.ALL)
@@ -132,5 +139,14 @@ public class Store {
         this.updateLongitude(store.getLongitude());
         this.businessDays.compareAndUpdate(store.getBusinessDays());
         this.businessHours.compareAndUpdate(store.getBusinessHours());
+    }
+
+    public int getRecentDensityRate() {
+        if (densityList.size() > 0) {
+            return this.densityList.get(densityList.size() - 1).getDensityRate();
+        } else {
+            // 실제 밀집도가 0일 수 있으므로, -1을 리턴하여 구분함.
+            return -1;
+        }
     }
 }
