@@ -11,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Getter @Setter
@@ -22,9 +23,9 @@ public class BusinessHours {
 
     @OneToOne(mappedBy = "businessHours")
     private Store store;
-
+    @NotNull
     private int openBusinessHour;
-
+    @NotNull
     private int closeBusinessHour;
 
     @Builder

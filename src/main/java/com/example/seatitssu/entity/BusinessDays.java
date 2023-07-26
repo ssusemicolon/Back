@@ -13,6 +13,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,18 +28,25 @@ public class BusinessDays {
     @OneToOne(mappedBy = "businessDays")
     private Store store;
 
+    @NotNull
     @Enumerated(EnumType.STRING)
     private Day sunday;
+    @NotNull
     @Enumerated(EnumType.STRING)
     private Day monday;
+    @NotNull
     @Enumerated(EnumType.STRING)
     private Day tuesday;
+    @NotNull
     @Enumerated(EnumType.STRING)
     private Day wednesday;
+    @NotNull
     @Enumerated(EnumType.STRING)
     private Day thursday;
+    @NotNull
     @Enumerated(EnumType.STRING)
     private Day friday;
+    @NotNull
     @Enumerated(EnumType.STRING)
     private Day saturday;
 
