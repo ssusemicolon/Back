@@ -61,7 +61,7 @@ public class StoreController {
         return ResultResponse.of(ResultCode.SEARCH_STORES_SUCCESS, storeInfoResponseDtoList);
     }
 
-    @DeleteMapping(value = "/store/delete/{storeId}")
+    @PutMapping(value = "/store/delete/{storeId}")
     public ResultResponse deleteStore(@PathVariable("storeId") Long storeId, @RequestBody String password) {
         StoreDeleteResponseDto storeDeleteResponseDto = storeService.deleteStore(storeId, password);
         return ResultResponse.of(ResultCode.DELETE_SPECIFIC_STORE_SUCCESS, storeDeleteResponseDto);
