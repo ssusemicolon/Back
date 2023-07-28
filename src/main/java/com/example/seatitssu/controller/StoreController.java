@@ -1,5 +1,6 @@
 package com.example.seatitssu.controller;
 
+import com.example.seatitssu.dto.store.StoreDeleteRequestDto;
 import com.example.seatitssu.dto.store.StoreDeleteResponseDto;
 import com.example.seatitssu.dto.store.StoreFindNearByResponseDto;
 import com.example.seatitssu.dto.store.StoreInfoRequestDto;
@@ -63,8 +64,8 @@ public class StoreController {
     }
 
     @PutMapping(value = "/store/delete/{storeId}")
-    public ResultResponse deleteStore(@PathVariable("storeId") Long storeId, @RequestBody String password) throws Exception {
-        StoreDeleteResponseDto storeDeleteResponseDto = storeService.deleteStore(storeId, password);
+    public ResultResponse deleteStore(@PathVariable("storeId") Long storeId, @RequestBody StoreDeleteRequestDto storeDeleteRequestDto) throws Exception {
+        StoreDeleteResponseDto storeDeleteResponseDto = storeService.deleteStore(storeId, storeDeleteRequestDto);
         return ResultResponse.of(ResultCode.DELETE_SPECIFIC_STORE_SUCCESS, storeDeleteResponseDto);
     }
 }

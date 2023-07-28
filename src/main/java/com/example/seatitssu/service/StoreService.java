@@ -1,6 +1,7 @@
 package com.example.seatitssu.service;
 
 import com.example.seatitssu.dto.NearByStoreInterface;
+import com.example.seatitssu.dto.store.StoreDeleteRequestDto;
 import com.example.seatitssu.dto.store.StoreDeleteResponseDto;
 import com.example.seatitssu.dto.store.StoreFindNearByResponseDto;
 import com.example.seatitssu.dto.store.StoreInfoResponseDto;
@@ -79,13 +80,13 @@ public class StoreService {
         return storeInfoResponseDtoList;
     }
 
-    public StoreDeleteResponseDto deleteStore(Long storeId, String password) throws Exception {
+    public StoreDeleteResponseDto deleteStore(Long storeId, StoreDeleteRequestDto storeDeleteRequestDto) throws Exception {
         Store store = storeRepository.findById(storeId).orElse(null);
 
         if (store == null) {
             System.out.println("=============해당 매장이 존재하지 않습니다.==========");
         }
-        if (password.equals(store.getPassword())) {
+        if (storeDeleteRequestDto.getPassword().equals(store.getPassword())) {
             storeRepository.delete(store);
         } else {
             throw new Exception("비밀번호가 일치하지 않습니다.");
