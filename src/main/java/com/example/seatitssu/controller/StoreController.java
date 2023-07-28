@@ -62,7 +62,7 @@ public class StoreController {
     }
 
     @PutMapping(value = "/store/delete/{storeId}")
-    public ResultResponse deleteStore(@PathVariable("storeId") Long storeId, @RequestBody String password) {
+    public ResultResponse deleteStore(@PathVariable("storeId") Long storeId, @RequestBody String password) throws Exception {
         StoreDeleteResponseDto storeDeleteResponseDto = storeService.deleteStore(storeId, password);
         return ResultResponse.of(ResultCode.DELETE_SPECIFIC_STORE_SUCCESS, storeDeleteResponseDto);
     }
