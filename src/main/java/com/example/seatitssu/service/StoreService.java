@@ -2,12 +2,8 @@ package com.example.seatitssu.service;
 
 import com.example.seatitssu.dto.NearByStoreInterface;
 import com.example.seatitssu.dto.store.StoreDeleteResponseDto;
-import com.example.seatitssu.dto.store.StoreFindNearByRequestDto;
 import com.example.seatitssu.dto.store.StoreFindNearByResponseDto;
 import com.example.seatitssu.dto.store.StoreInfoResponseDto;
-import com.example.seatitssu.entity.BusinessDays;
-import com.example.seatitssu.entity.BusinessHours;
-import com.example.seatitssu.entity.Density;
 import com.example.seatitssu.entity.Store;
 import com.example.seatitssu.repository.StoreRepository;
 import lombok.RequiredArgsConstructor;
@@ -57,10 +53,7 @@ public class StoreService {
         return storeInfoResponseDtoList;
     }
 
-    public List<StoreFindNearByResponseDto> findNearByStores(StoreFindNearByRequestDto storeFindNearByRequestDto) {
-        double radius = storeFindNearByRequestDto.getRadius();
-        double latitude = storeFindNearByRequestDto.getLatitude();
-        double longitude = storeFindNearByRequestDto.getLongitude();
+    public List<StoreFindNearByResponseDto> findNearByStores(double radius, double latitude, double longitude) {
         List<NearByStoreInterface> nearByStoreInterfaceList = storeRepository.findNearByStores(radius, latitude, longitude);
 
         List<StoreFindNearByResponseDto> storeFindNearByResponseDtoList = new ArrayList<>();

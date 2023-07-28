@@ -78,7 +78,8 @@ public class DensityService {
     public DensityGetWeekResponseDto getWeekDensity(Long storeId, LocalDate today) {
         Store store = storeRepository.findById(storeId).orElse(null);
         List<Integer> densityPerDayList = new ArrayList<>();
-
+        // today => 2023-07-28
+        // 2023-07-28 - 7 =
         // 요청 날짜로부터 일주일 전 날짜에서 시작
         LocalDate day = today.minusDays(7);
         while (day.isBefore(today)) {

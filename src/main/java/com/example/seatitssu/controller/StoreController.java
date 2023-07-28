@@ -1,7 +1,6 @@
 package com.example.seatitssu.controller;
 
 import com.example.seatitssu.dto.store.StoreDeleteResponseDto;
-import com.example.seatitssu.dto.store.StoreFindNearByRequestDto;
 import com.example.seatitssu.dto.store.StoreFindNearByResponseDto;
 import com.example.seatitssu.dto.store.StoreInfoRequestDto;
 import com.example.seatitssu.dto.store.StoreInfoResponseDto;
@@ -44,9 +43,9 @@ public class StoreController {
         return ResultResponse.of(ResultCode.GET_SPECIFIC_STORE_SUCCESS, storeInfoResponseDto);
     }
 
-    @PostMapping(value = "/store/nearby")
-    public ResultResponse findNearByStores(@RequestBody StoreFindNearByRequestDto storeFindNearByRequestDto) {
-        List<StoreFindNearByResponseDto> storeFindNearByResponseDtoList = storeService.findNearByStores(storeFindNearByRequestDto);
+    @GetMapping(value = "/store/nearby")
+    public ResultResponse findNearByStores(@RequestParam double radius, @RequestParam double latitude, @RequestParam double longitude) {
+        List<StoreFindNearByResponseDto> storeFindNearByResponseDtoList = storeService.findNearByStores(radius, latitude, longitude);
         return ResultResponse.of(ResultCode.GET_NEARBY_STORES_SUCCESS, storeFindNearByResponseDtoList);
     }
 
