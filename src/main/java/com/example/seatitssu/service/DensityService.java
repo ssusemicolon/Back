@@ -25,7 +25,8 @@ public class DensityService {
     public void updateDensity(DensityUpdateRequestDto densityUpdateRequestDto) {
         Long storeId = densityUpdateRequestDto.getStoreId();
         Store store = storeRepository.findById(storeId).orElse(null);
-        Density density = new Density(store, densityUpdateRequestDto.getDensity(), densityUpdateRequestDto.getWhen());
+        int densityRate = (int)(((double)densityUpdateRequestDto.getPeopleCount() / store.getSeatCount()) * 100);
+        Density density = new Density(store, densityRate, densityUpdateRequestDto.getWhen());
         densityRepository.save(density);
     }
 
