@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -26,7 +27,7 @@ public class StoreController {
     private final StoreService storeService;
 
     @PostMapping(value = "/store/register")
-    public ResultResponse register(@RequestBody StoreInfoRequestDto storeInfoRequestDto) {
+    public ResultResponse register(@Valid @RequestBody StoreInfoRequestDto storeInfoRequestDto) {
         Long registeredStoreId = storeService.register(storeInfoRequestDto.toEntity());
         return ResultResponse.of(ResultCode.REGISTER_STORE_SUCCESS, StoreRegisterResponseDto.of(registeredStoreId));
     }
