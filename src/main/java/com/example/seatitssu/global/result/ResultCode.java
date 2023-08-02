@@ -1,4 +1,4 @@
-package com.example.seatitssu.global;
+package com.example.seatitssu.global.result;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

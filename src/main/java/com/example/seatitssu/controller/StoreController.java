@@ -6,11 +6,10 @@ import com.example.seatitssu.dto.store.StoreFindNearByResponseDto;
 import com.example.seatitssu.dto.store.StoreInfoRequestDto;
 import com.example.seatitssu.dto.store.StoreInfoResponseDto;
 import com.example.seatitssu.dto.store.StoreRegisterResponseDto;
-import com.example.seatitssu.global.ResultCode;
-import com.example.seatitssu.global.ResultResponse;
+import com.example.seatitssu.global.result.ResultCode;
+import com.example.seatitssu.global.result.ResultResponse;
 import com.example.seatitssu.service.StoreService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -41,6 +40,7 @@ public class StoreController {
 
     @GetMapping(value = "/store/storeInfo/{storeId}")
     public ResultResponse findStore(@PathVariable("storeId")Long storeId) {
+        System.out.println("findStore 컨트롤러 메소드 실행");
         StoreInfoResponseDto storeInfoResponseDto = storeService.findStore(storeId);
         return ResultResponse.of(ResultCode.GET_SPECIFIC_STORE_SUCCESS, storeInfoResponseDto);
     }
@@ -64,7 +64,7 @@ public class StoreController {
     }
 
     @PutMapping(value = "/store/delete/{storeId}")
-    public ResultResponse deleteStore(@PathVariable("storeId") Long storeId, @RequestBody StoreDeleteRequestDto storeDeleteRequestDto) throws Exception {
+    public ResultResponse deleteStore(@PathVariable("storeId") Long storeId, @RequestBody StoreDeleteRequestDto storeDeleteRequestDto) {
         StoreDeleteResponseDto storeDeleteResponseDto = storeService.deleteStore(storeId, storeDeleteRequestDto);
         return ResultResponse.of(ResultCode.DELETE_SPECIFIC_STORE_SUCCESS, storeDeleteResponseDto);
     }

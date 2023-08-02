@@ -1,6 +1,8 @@
 package com.example.seatitssu.dto.density;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import lombok.Getter;
@@ -14,6 +16,7 @@ public class DensityUpdateRequestDto {
     private Long storeId;
 
     @NotNull(message = "탐지한 사람의 수가 필요합니다.")
+    @Min(value = 0, message = "탐지된 사람의 수는 0명 이상이어야 합니다.")
     private int personCount;
 
     @NotNull(message = "밀집도가 갱신된 시간을 표시하기 위해 갱신 시간이 필요합니다.")

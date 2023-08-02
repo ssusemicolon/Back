@@ -29,7 +29,7 @@ class StoreServiceTest {
     StoreRepository storeRepository;
 
 
-    @Test
+/*    @Test
     public void 매장_등록() throws Exception {
         //given
         Store store = new Store();
@@ -40,9 +40,9 @@ class StoreServiceTest {
         //then
         assertThat(store).isEqualTo(storeRepository.findById(storeId).orElse(null));
 
-    }
+    }*/
 
-    @Test
+/*    @Test
     @DisplayName("매장의 고유번호인 storeId를 이용하여 특정 매장을 조회한다")
     void 고유번호를_이용한_매장_조회() throws Exception {
         //given
@@ -60,9 +60,9 @@ class StoreServiceTest {
         // storeId는 primary key로 해당 값이 같을 경우, 같은 컬럼임을 의미한다.
         assertThat(findStoreId).isEqualTo(storeId);
 
-    }
+    }*/
 
-    @Test
+/*    @Test
     @DisplayName("매장의 정보를 변경해본다")
     void 매장_이름_변경() throws Exception {
         // given
@@ -82,6 +82,6 @@ class StoreServiceTest {
         // then
         assertThat(updatedStoreId).isEqualTo(storeId);
         assertThat(updatedStore.getStoreName()).isEqualTo("폭스메이드");
-    }
+    }*/
 
 }

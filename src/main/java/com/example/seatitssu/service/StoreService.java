@@ -6,6 +6,9 @@ import com.example.seatitssu.dto.store.StoreDeleteResponseDto;
 import com.example.seatitssu.dto.store.StoreFindNearByResponseDto;
 import com.example.seatitssu.dto.store.StoreInfoResponseDto;
 import com.example.seatitssu.entity.Store;
+import com.example.seatitssu.global.error.ErrorCode;
+import com.example.seatitssu.global.error.exception.EntityNotFoundException;
+import com.example.seatitssu.global.error.exception.PasswordFalseException;
 import com.example.seatitssu.repository.StoreRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -24,20 +27,18 @@ public class StoreService {
 
     public Long updateStore(Long storeId, Store updatedStore) {
         Store store = storeRepository.findById(storeId).orElse(null);
-        if (store == null ) {
-            System.out.println("============변경할 매장이 존재하지 않습니다.===============");
+        if (store == null) {
+            throw new EntityNotFoundException(ErrorCode.STORE_NOT_FOUND);
         }
 
-        store.compareAndUpdate(store);
-
+        store.compareAndUpdate(updatedStore);
         return storeRepository.save(store).getId();
     }
 
     public StoreInfoResponseDto findStore(Long storeId) {
         Store store = storeRepository.findById(storeId).orElse(null);
         if (store == null) {
-            System.out.println("==============찾으시는 매장이 없습니다.==============");
-            return null;
+            throw new EntityNotFoundException(ErrorCode.STORE_NOT_FOUND);
         }
 
         return StoreInfoResponseDto.of(store);
@@ -48,6 +49,7 @@ public class StoreService {
 
         List<StoreInfoResponseDto> storeInfoResponseDtoList = new ArrayList<>();
         for (Store store : storeList) {
+            // 질문: 이미, findByStoreNameContaining() 메소드를 통해, 실제 storeId가 있는 매장만 가져왔는데, 이게 없을 확률이 0인데도 null인 경우를 검사해야 하는가?
             storeInfoResponseDtoList.add(StoreInfoResponseDto.of(store));
         }
 
@@ -59,6 +61,7 @@ public class StoreService {
 
         List<StoreFindNearByResponseDto> storeFindNearByResponseDtoList = new ArrayList<>();
         for (NearByStoreInterface nearByStoreinterface : nearByStoreInterfaceList) {
+            // 질문: 이미, findNearByStore() 메소드를 통해, 실제 storeId가 있는 매장만 가져왔는데, 이게 없을 확률이 0인데도 null인 경우를 검사해야 하는가?
             Long storeId = nearByStoreinterface.getStoreId();
             Store store = storeRepository.findById(storeId).orElse(null);
 
@@ -66,7 +69,6 @@ public class StoreService {
         }
 
         return storeFindNearByResponseDtoList;
-
     }
 
     public List<StoreInfoResponseDto> findAllStores() {
@@ -80,17 +82,20 @@ public class StoreService {
         return storeInfoResponseDtoList;
     }
 
-    public StoreDeleteResponseDto deleteStore(Long storeId, StoreDeleteRequestDto storeDeleteRequestDto) throws Exception {
+    public StoreDeleteResponseDto deleteStore(Long storeId, StoreDeleteRequestDto storeDeleteRequestDto) {
         Store store = storeRepository.findById(storeId).orElse(null);
-
         if (store == null) {
-            System.out.println("=============해당 매장이 존재하지 않습니다.==========");
+            throw new EntityNotFoundException(ErrorCode.STORE_NOT_FOUND);
         }
-        if (storeDeleteRequestDto.getPassword().equals(store.getPassword())) {
+
+        String clientInputPassword = storeDeleteRequestDto.getPassword();
+        if (clientInputPassword.equals(store.getPassword())) {
             storeRepository.delete(store);
         } else {
-            throw new Exception("비밀번호가 일치하지 않습니다.");
+            // 비밀번호가 틀리면 200 결과? 아니면 401 결과?
+            throw new PasswordFalseException(ErrorCode.STORE_FALSE_PASSWORD);
         }
+
         return StoreDeleteResponseDto.of(storeId);
     }
 }
