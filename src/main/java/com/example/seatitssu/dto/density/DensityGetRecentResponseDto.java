@@ -19,9 +19,9 @@ public class DensityGetRecentResponseDto {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime when;
 
-    public static DensityGetRecentResponseDto of(Density density) {
+    public static DensityGetRecentResponseDto of(Long storeId, Density density) {
         return DensityGetRecentResponseDto.builder()
-                .storeId(density.getId())
+                .storeId(storeId)
                 .density(density.getDensityRate())
                 .when(density.getCalculatedTime())
                 .build();

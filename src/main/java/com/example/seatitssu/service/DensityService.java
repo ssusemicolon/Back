@@ -48,7 +48,7 @@ public class DensityService {
         }
 
         Density recentDensity = densityList.get(densityList.size() - 1);
-        return DensityGetRecentResponseDto.of(recentDensity);
+        return DensityGetRecentResponseDto.of(storeId, recentDensity);
         // 또 다른 방법: Density 테이블에서 입력받은 storeId랑 동일한 거 싹 다 찾은 다음, 시간 순 중 가장 빠른 거 뱉기.
     }
 

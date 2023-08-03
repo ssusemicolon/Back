@@ -46,7 +46,7 @@ public class StoreController {
         return ResultResponse.of(ResultCode.GET_SPECIFIC_STORE_SUCCESS, storeInfoResponseDto);
     }
 
-    @GetMapping(value = "/stores?radius=number&latitude=number&longitude=number")
+    @GetMapping(value = "/stores/nearby")
     public ResultResponse findNearByStores(@RequestParam double radius, @RequestParam double latitude, @RequestParam double longitude) {
         List<StoreFindNearByResponseDto> storeFindNearByResponseDtoList = storeService.findNearByStores(radius, latitude, longitude);
         return ResultResponse.of(ResultCode.GET_NEARBY_STORES_SUCCESS, storeFindNearByResponseDtoList);

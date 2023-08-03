@@ -57,6 +57,9 @@ public class StoreService {
     }
 
     public List<StoreFindNearByResponseDto> findNearByStores(double radius, double latitude, double longitude) {
+        System.out.println("radius = " + radius);
+        System.out.println("latitude = " + latitude);
+        System.out.println("longitude = " + longitude);
         List<NearByStoreInterface> nearByStoreInterfaceList = storeRepository.findNearByStores(radius, latitude, longitude);
 
         List<StoreFindNearByResponseDto> storeFindNearByResponseDtoList = new ArrayList<>();
@@ -64,7 +67,7 @@ public class StoreService {
             // 질문: 이미, findNearByStore() 메소드를 통해, 실제 storeId가 있는 매장만 가져왔는데, 이게 없을 확률이 0인데도 null인 경우를 검사해야 하는가?
             Long storeId = nearByStoreinterface.getStoreId();
             Store store = storeRepository.findById(storeId).orElse(null);
-
+            System.out.println("distance: " + nearByStoreinterface.getDistance());
             storeFindNearByResponseDtoList.add(StoreFindNearByResponseDto.of(store, nearByStoreinterface.getDistance()));
         }
 
