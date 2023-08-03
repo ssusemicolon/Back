@@ -28,20 +28,20 @@ public class DensityController {
         return ResultResponse.of(ResultCode.UPDATE_DENSITY_SUCCESS);
     }
 
-    @GetMapping("/density/current/{storeId}")
+    @GetMapping("/stores/{storeId}/density/now")
     public ResultResponse getRecentDensity(@PathVariable("storeId") Long storeId) {
         DensityGetRecentResponseDto densityGetRecentResponseDto =  densityService.getRecentDensity(storeId);
         return ResultResponse.of(ResultCode.GET_RECENT_DENSITY_SUCCESS, densityGetRecentResponseDto);
     }
 
-    @GetMapping("/density/{storeId}")
+    @GetMapping("/stores/{storeId}/density")
     public ResultResponse getSpecificDayDensity(@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate specificDate,
                                                 @PathVariable("storeId") Long storeId) {
         DensityGetSpecificDayResponseDto densityGetSpecificDayResponseDto = densityService.getSpecificDayDensity(storeId, specificDate);
         return ResultResponse.of(ResultCode.GET_SPECIFIC_DAY_DENSITY_SUCCESS, densityGetSpecificDayResponseDto);
     }
 
-    @GetMapping("/density/week/{storeId}")
+    @GetMapping("/stores/{storeId}/density/pastWeek")
     public ResultResponse getWeekDensity(@PathVariable("storeId") Long storeId) {
         // 클라이언트 요청 시간이 자정 직전일 경우, 날짜가 넘어가는 문제가 생길 수 있어서.. 프론트 단에서 날짜를 넘겨받을지 고민 중
         LocalDate today = LocalDate.now();
