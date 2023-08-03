@@ -4,10 +4,11 @@
   <p align="center">
     2023년 숭실대학교 소프트웨어학부 여름방학 공모전에 공모한 작품 '자리있슈'의 서버(back end)입니다.
     <br />
-    <a href="https://github.com/Instagram-Clone-Coding"><strong>클라이언트(front end) 저장소</strong></a><br>
-    <a href="https://github.com/Instagram-Clone-Coding/React_instagram_clone"><strong>웹 서비스 구경하기(서비스 링크)</strong></a>
+    <a href="https://github.com/ssusemicolon/Front"><strong>클라이언트(front end) 저장소</strong></a><br>
+    <a href="http://ec2-43-201-120-175.ap-northeast-2.compute.amazonaws.com:3000"><strong>웹 서비스 구경하기(서비스 링크)</strong></a>
     <br />
-    <div style="background-color: #ffdce0;">주의. AWS 프리티어를 이용해 배포한 웹 서비스로, 서버를 내릴 경우 웹 서비스 제공이 어려운 점에 대해 미리 사과드리며, 양해를 구하는 바입니다.</div>
+    <div style="background-color: #ffdce0;">```주의. AWS 프리티어를 이용해 배포한 웹 서비스로, 서버를 내릴 경우 
+      웹 서비스 제공이 어려운 점에 대해 미리 사과드리며, 양해를 구하는 바입니다.```</div>
     <br />
   </p>
 </div>
